@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using HttpClientSample.Models;
 using System.Collections.Generic;
-using System.Linq;
+using System.Web.Script.Serialization;
+
 
 namespace HttpClientSample
 {
@@ -66,11 +67,13 @@ namespace HttpClientSample
         static async Task<List<TodoItem>> GetTodoItemsAsync(string path)
         {
 
-          //  TodoItem allto = null;
+            // TodoItem allto = null;
             var response = await client.GetStringAsync(path);
-            
-             var todoItems = JsonConvert.DeserializeObject<List<TodoItem>>(response);
-             return todoItems;
+
+            var todoItems = JsonConvert.DeserializeObject<List<TodoItem>>(response);
+           return todoItems;
+
+          
         }
 
         static void Main()
@@ -91,7 +94,7 @@ namespace HttpClientSample
                 // Create a new product
                 // Product product = new Product { Name = "Gizmo", Price = 100, Category = "Widgets" };
 
-                TodoItem items = new TodoItem();
+            //    TodoItem items = new TodoItem();
 
                 //  var url = await CreateProductAsync(product);
                 //  Console.WriteLine($"Created at {url}");
@@ -101,9 +104,12 @@ namespace HttpClientSample
                 //  ShowProduct(product);
 
                 //Get todo lists
-              //  List<TodoItem> items;
+               List<TodoItem> items ;
                 items = await GetTodoItemsAsync("http://localhost:60761/api/todos/QueryAll2");
-                ShowTodo(items);
+             //  Console.WriteLine(items.);
+
+
+              
               //  Console.WriteLine($"Deleted (HTTP Status = {(int)statusCode})");
               //  Console.WriteLine($"Description: {itmes.IndexOf()}\tDueDate: {alltodo.DueDate}\tisDone: {alltodo.isDone}");
               //  Console.WriteLine(items.OrderBy(item => item.isDone).ThenBy(item => item.id).ToList());
